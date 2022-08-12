@@ -8,6 +8,8 @@ public class ExampleListener : MonoBehaviour
     public ButtonHandler PrimaryAxisClickHandler = null;
     public AxisHandler2D PrimaryAxisHandler = null;
     public AxisHandler triggerHandler = null;
+    public KeyHandler upArrowHandler = null;
+    public KeyHandler downArrowHandler = null;
 
     public void OnEnable()
     {
@@ -22,6 +24,9 @@ public class ExampleListener : MonoBehaviour
 
         SecondaryButtonPressHandler.OnButtonDown += PrintSecondaryButtonDown;
         SecondaryButtonPressHandler.OnButtonUp += PrintSecondaryButtonUp;
+
+        upArrowHandler.KeyDown += PrintKeyDown;
+        downArrowHandler.KeyDown += PrintKeyDown;
     }
 
     public void OnDisable()
@@ -37,6 +42,9 @@ public class ExampleListener : MonoBehaviour
 
         SecondaryButtonPressHandler.OnButtonDown -= PrintSecondaryButtonDown;
         SecondaryButtonPressHandler.OnButtonUp -= PrintPrimaryButtonUp;
+
+        upArrowHandler.KeyDown -= PrintKeyDown;
+        downArrowHandler.KeyDown -= PrintKeyDown;
     }
 
     private void PrintTouchButtonDown(XRController controller)
@@ -77,5 +85,9 @@ public class ExampleListener : MonoBehaviour
     private void PrintTrigger(XRController controller, float value)
     {
         print("Trigger pressed: " + value);
+    }
+
+    private void PrintKeyDown(KeyCode key) {
+        Debug.Log("key down: " + key);
     }
 }
